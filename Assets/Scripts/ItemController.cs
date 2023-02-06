@@ -5,11 +5,22 @@ using UnityEngine;
 public class ItemController : MonoBehaviour
 {
     private bool canPickUp;
+    [SerializeField] private SpriteRenderer spriteItem;
+    [SerializeField] public Item item;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
+        SetItemToObject(item);
         
+        
+    }
+
+    public void SetItemToObject(Item itemStart)
+    {
+        this.item = itemStart;
+        spriteItem.sprite = item.image;
+
     }
 
     // Update is called once per frame
@@ -23,7 +34,12 @@ public class ItemController : MonoBehaviour
 
     private void PickedUp()
     {
-        Destroy(gameObject);
+        bool openSpace = InventorySystem.instance.AddItem(item);
+        if (openSpace)
+        {
+            Destroy(gameObject);
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
