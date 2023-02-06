@@ -28,5 +28,16 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(h * moveSpeed, v * moveSpeed);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.CompareTag("Door"))
+        {
+            //Destroy(collision.collider.gameObject);
+            GameObject door = collision.collider.gameObject;
+            door.transform.localScale = new Vector3(0.5f, 2, 1);
+            door.transform.localPosition = new Vector3(door.transform.position.x-1, door.transform.position.y+1, door.transform.position.z); 
+        }
+    }
+
 
 }
