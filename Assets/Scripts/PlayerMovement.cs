@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private float h;
     private float v;
 
+    private bool facingRight;
+
     [SerializeField] private float moveSpeed;
 
     private bool doorOpen;
@@ -20,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //rb = GetComponent<Rigidbody2D>();
         doorOpen = false;
+        facingRight = true;
     }
 
     // Update is called once per frame
@@ -29,6 +33,21 @@ public class PlayerMovement : MonoBehaviour
         v = Input.GetAxis("Vertical");
 
         rb.velocity = new Vector2(h * moveSpeed, v * moveSpeed);
+
+        if (facingRight && h < 0)
+        {
+            Flip();
+        }
+        else if (!facingRight && h > 0)
+        {
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        transform.Rotate(0f, 180f, 0f);
+        facingRight = !facingRight;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
