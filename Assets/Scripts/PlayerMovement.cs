@@ -9,46 +9,51 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
 
-    private float h;
-    private float v;
 
-    private bool facingRight;
+
+    public Camera GameCamera;
+
 
     [SerializeField] private float moveSpeed;
 
     private bool doorOpen;
+    Vector2 InputMovement;
+    Vector2 AimDirection;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        //rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         doorOpen = false;
-        facingRight = true;
+        
+
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
+        
+        InputMovement.x = Input.GetAxisRaw("Horizontal");
+        InputMovement.y = Input.GetAxisRaw("Vertical");
+        AimDirection = GameCamera.ScreenToWorldPoint(Input.mousePosition);
 
-        rb.velocity = new Vector2(h * moveSpeed, v * moveSpeed);
-
-        if (facingRight && h < 0)
-        {
-            Flip();
-        }
-        else if (!facingRight && h > 0)
-        {
-            Flip();
-        }
     }
 
-    private void Flip()
+    
+    void FixedUpdate()
     {
-        transform.Rotate(0f, 180f, 0f);
-        facingRight = !facingRight;
+        
+        rb.MovePosition(rb.position + InputMovement * moveSpeed * Time.fixedDeltaTime);
+
+
+        Vector2 LookingAt = AimDirection - rb.position;
+        float turnAngle = Mathf.Atan2(LookingAt.y, LookingAt.x) * Mathf.Rad2Deg - 90f;
+        rb.rotation = turnAngle;
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

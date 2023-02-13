@@ -11,24 +11,26 @@ public class Shoot : MonoBehaviour
 
     [SerializeField] GameObject bullet;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float bulletSpeed = 20f;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        
+        if (Input.GetButtonDown("Fire1"))
         {
             Fire();
         }
     }
 
+    
     private void Fire()
     {
-        Instantiate(bullet, fp.position, fp.rotation);
+        
+        GameObject playerBullet = Instantiate(bullet, fp.position, fp.rotation);
+        Rigidbody2D bulletBody = playerBullet.GetComponent<Rigidbody2D>();
+        bulletBody.AddForce(fp.up * -bulletSpeed, ForceMode2D.Impulse);
+
     }
 
 }
