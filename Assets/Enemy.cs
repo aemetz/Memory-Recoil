@@ -34,6 +34,9 @@ public class Enemy : MonoBehaviour
     public float maxHealth;
     public float health;
 
+    public EnemyHealth HealthBar;
+
+
 
     void Start()
     {
@@ -44,7 +47,7 @@ public class Enemy : MonoBehaviour
 
         currentTime = Time.time;
 
-        //HealthBar.SetHealth(health, maxHealth);
+        HealthBar.SetHealth(health, maxHealth);
 
     }
 
@@ -76,7 +79,19 @@ public class Enemy : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
-   
+
+
+    public void LoseHealth(float damage)
+    {
+        health -= damage;
+        HealthBar.SetHealth(health, maxHealth);
+        if (health <= 0)
+        {
+            
+            Destruct();
+        }
+    }
+
 
 
 
