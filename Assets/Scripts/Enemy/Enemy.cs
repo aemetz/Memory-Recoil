@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour
         HeadingToPlayer = OffsetToPlayer.normalized;
 
 
+
         if (Vector2.Distance(transform.position, playerChase.position) > enemyStopDistance)
         {
 
@@ -71,7 +72,6 @@ public class Enemy : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, playerChase.position, -enemySpeed * Time.deltaTime);
         }
-
 
     }
 
