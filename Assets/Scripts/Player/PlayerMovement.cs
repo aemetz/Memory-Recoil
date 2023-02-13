@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
 
-    private bool doorOpen;
     Vector2 InputMovement;
     Vector2 AimDirection;
 
@@ -25,11 +24,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        doorOpen = false;
-        
-
-
-
     }
 
     // Update is called once per frame
@@ -53,23 +47,5 @@ public class PlayerMovement : MonoBehaviour
         float turnAngle = Mathf.Atan2(LookingAt.y, LookingAt.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = turnAngle;
     }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.gameObject.CompareTag("Door"))
-        {
-            if (!doorOpen)
-            {
-                doorOpen = true;
-                //Destroy(collision.collider.gameObject);
-                GameObject door = collision.collider.gameObject;
-                door.transform.localScale = new Vector3(0.5f, 2, 1);
-                door.transform.localPosition = new Vector3(door.transform.position.x - 1, door.transform.position.y + 1, door.transform.position.z);
-            }
-            
-        }
-    }
-
 
 }

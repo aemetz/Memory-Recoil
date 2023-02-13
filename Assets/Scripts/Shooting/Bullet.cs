@@ -35,6 +35,8 @@ public class Bullet : MonoBehaviour
 
         if (!collision.collider.gameObject.CompareTag("Player"))
         {
+            //Debug.Log(collision.collider.gameObject.name);
+            //Debug.Log(collision.collider.gameObject.tag);
             Destroy(gameObject);
         }
     }
