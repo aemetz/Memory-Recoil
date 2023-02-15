@@ -11,7 +11,7 @@ public class InventorySystem : MonoBehaviour
     public GameObject ItemPrefab;
     public int maxItemAllowed = 10;
 
-    int selectedPosition = -1;
+    int selectedPosition = 0;
 
     public void Awake()
     {
