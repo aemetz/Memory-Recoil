@@ -33,10 +33,10 @@ public class Bullet : MonoBehaviour
     {
         
 
-        if (!collision.collider.gameObject.CompareTag("Player"))
+        if (collision.gameObject.name != "WaveTrigger")
         {
-            //Debug.Log(collision.collider.gameObject.name);
-            //Debug.Log(collision.collider.gameObject.tag);
+            Debug.Log(collision.collider.gameObject.name);
+            Debug.Log(collision.collider.gameObject.tag);
             Destroy(gameObject);
         }
     }
