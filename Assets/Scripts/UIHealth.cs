@@ -10,7 +10,7 @@ public class UIHealth : MonoBehaviour
     public int currHp;
     public int maxHp;
 
-    // Sprites 0-9, with 0 being empty and 9 being full
+    // Sprites 0-9, with 0 being empty and 9 being full.
     [SerializeField] private Sprite[] healthBars;
 
     // Start is called before the first frame update
