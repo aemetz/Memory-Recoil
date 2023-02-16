@@ -21,6 +21,7 @@ public class InventorySystem : MonoBehaviour
     public void Start()
     {
         selectedPosition = 0;
+        SelectSlot(0);
     }
 
     private void Update()

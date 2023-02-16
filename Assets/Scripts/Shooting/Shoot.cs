@@ -34,16 +34,26 @@ public class Shoot : MonoBehaviour
     private void Fire()
     {
 
-        //Item equipped = inv.ChooseSelectedIem();
+        Item equipped = inv.ChooseSelectedIem();
+
+        Debug.Log(equipped);
 
         //if (equipped.name == "Pistol")
         //{
         //    Debug.Log("Pistol detected");
         //}
 
-        GameObject playerBullet = Instantiate(bullet, fp.position, fp.rotation);
-        Rigidbody2D bulletBody = playerBullet.GetComponent<Rigidbody2D>();
-        bulletBody.AddForce(fp.up * -bulletSpeed, ForceMode2D.Impulse);
+        if(equipped != null)
+        {
+            if(equipped.name == "Pistol")
+            {
+                GameObject playerBullet = Instantiate(bullet, fp.position, fp.rotation);
+                Rigidbody2D bulletBody = playerBullet.GetComponent<Rigidbody2D>();
+                bulletBody.AddForce(fp.up * -bulletSpeed, ForceMode2D.Impulse);
+            }
+        }
+
+        
 
     }
 
