@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] float timeLive = 3.0f;
-    float BulletDamage = 1f;
+    [SerializeField] public float BulletDamage = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +35,8 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.name != "WaveTrigger")
         {
-            Debug.Log(collision.collider.gameObject.name);
-            Debug.Log(collision.collider.gameObject.tag);
+            //Debug.Log(collision.collider.gameObject.name);
+            //Debug.Log(collision.collider.gameObject.tag);
             Destroy(gameObject);
         }
     }
