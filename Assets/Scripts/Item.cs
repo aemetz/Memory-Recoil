@@ -14,6 +14,10 @@ public class Item : ScriptableObject
     public ActionType action;
     public Vector2Int range = new Vector2Int(5, 4);
     public bool stackable = true;
+
+    public string itemTitle;
+    public string itemDescription;
+    public int itemCost;
     // Start is called before the first frame update
     void Start()
     {

@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 970ccb53b0a7f0b419a1431fe2c15159, type: 3}
-  m_Name: Pistol
+  m_Name: MachineGun
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
-  image: {fileID: 21300000, guid: 5d7061fc7da05ce44add317708ec7215, type: 3}
-  type: 1
-  action: 1
+  image: {fileID: 0}
+  type: 0
+  action: 0
   range: {x: 5, y: 4}
   stackable: 1
-  itemTitle: Pistol
-  itemDescription: A trusty handgun.
-  itemCost: 50
+  itemTitle: MachineGun
+  itemDescription: Left behind by one of the soldiers. Looks like it can deal some
+    damage.
+  itemCost: 100
