@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 using Transform = UnityEngine.Transform;
@@ -15,6 +17,15 @@ public class Shoot : MonoBehaviour
 
     [SerializeField] private InventorySystem inv;
 
+    //public string activeWeapon;
+
+    private float prevBulletTime = 0;
+
+    // Change these variables in switch case depending on which gun is equipped
+    private float currFireRate;
+    private float currDamage;
+    private string currWeapon;
+
     private void Start()
     {
         inv = FindObjectOfType<InventorySystem>();
@@ -28,6 +39,13 @@ public class Shoot : MonoBehaviour
         {
             Fire();
         }
+
+        //Item equipped = inv.ChooseSelectedIem();
+        //if (equipped.name == "Pistol")
+        //{
+        //    activeWeapon = "Pistol";
+        //}
+
     }
 
     
@@ -38,20 +56,49 @@ public class Shoot : MonoBehaviour
 
         Debug.Log(equipped);
 
-        //if (equipped.name == "Pistol")
-        //{
-        //    Debug.Log("Pistol detected");
-        //}
-
-        if(equipped != null)
+        if (equipped != null)
         {
-            if(equipped.name == "Pistol")
+            currWeapon = equipped.name;
+        }
+        else
+        {
+            currWeapon = "None";
+        }
+
+        // Set gun stats here
+        switch (currWeapon)
+        {
+            case "Pistol":
+                currFireRate = 0.5f;
+                currDamage = 2f;
+                break;
+
+            case "SMG":
+                currFireRate = 0.1f;
+                currDamage = 0.7f;
+                break;
+
+            case "None":
+                break;
+        }
+
+
+        if (Time.time > prevBulletTime + currFireRate)
+        {
+            prevBulletTime = Time.time;
+
+            if (equipped != null)
             {
                 GameObject playerBullet = Instantiate(bullet, fp.position, fp.rotation);
+                playerBullet.GetComponent<Bullet>().BulletDamage = currDamage;
+
                 Rigidbody2D bulletBody = playerBullet.GetComponent<Rigidbody2D>();
                 bulletBody.AddForce(fp.up * -bulletSpeed, ForceMode2D.Impulse);
             }
+
         }
+
+        
 
         
 

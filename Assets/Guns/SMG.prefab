@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f0baaa1f4b7b245b8adae6e15a86bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteItem: {fileID: 0}
-  item: {fileID: 0}
+  spriteItem: {fileID: 7959920155765389714}
+  item: {fileID: 11400000, guid: bd339704aea15fa45a6b12e0cbbede7a, type: 2}
 --- !u!114 &3983732104446040716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,3 +115,4 @@ MonoBehaviour:
   fp: {fileID: 0}
   bullet: {fileID: 5882194546393767400, guid: 04114b2abe329714f84ab7cd64181230, type: 3}
   bulletSpeed: 20
+  inv: {fileID: 0}
