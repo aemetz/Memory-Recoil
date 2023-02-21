@@ -25,7 +25,14 @@ public class Bullet : MonoBehaviour
         {
             collision.GetComponent<Enemy>().LoseHealth(BulletDamage);
         }
-        Destroy(gameObject);
+        if (collision.CompareTag("WaveTrigger") == false)
+        {
+            //Debug.Log(collision.collider.gameObject.name);
+            //Debug.Log(collision.collider.gameObject.tag);
+            Destroy(gameObject);
+        }
+        
+        
 
     }
 
