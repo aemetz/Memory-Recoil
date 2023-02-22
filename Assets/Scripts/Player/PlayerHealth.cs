@@ -8,12 +8,17 @@ public class PlayerHealth : MonoBehaviour
 
     public int currHealth;
 
-
+    private float regenRate;
+    private float lastRegen;
+    private int regenAmt;
 
     // Start is called before the first frame update
     void Start()
     {
         currHealth = maxHealth;
+        regenRate = 2f;
+        lastRegen = 0f;
+        regenAmt = 1;
     }
 
     public void TakeDamage(int damage)
@@ -27,4 +32,25 @@ public class PlayerHealth : MonoBehaviour
             //Destroy(gameObject);
         }
     }
+
+    public void GainHealth(int amount)
+    {
+        if (currHealth < maxHealth)
+        {
+            currHealth += amount;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Regen"))
+        {
+            if (Time.time > lastRegen + regenRate)
+            {
+                lastRegen = Time.time;
+                GainHealth(regenAmt);
+            }
+        }
+    }
+
 }

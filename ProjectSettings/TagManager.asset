@@ -12,6 +12,7 @@ TagManager:
   - WaveTrigger
   - Currency
   - Shop
+  - Regen
   layers:
   - Default
   - TransparentFX
