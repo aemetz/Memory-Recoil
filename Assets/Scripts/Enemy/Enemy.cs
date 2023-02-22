@@ -97,6 +97,7 @@ public class Enemy : MonoBehaviour
 
     void Destruct()
     {
+        GetComponent<EnemyLoot>().SpawnLoot(transform.position);
         Destroy(gameObject);
     }
 

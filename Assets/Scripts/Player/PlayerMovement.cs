@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     Vector2 InputMovement;
     Vector2 AimDirection;
 
+    public CurrencyManager currencyControl;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         InputMovement.y = Input.GetAxisRaw("Vertical");
         AimDirection = GameCamera.ScreenToWorldPoint(Input.mousePosition);
 
+        
     }
 
     
@@ -46,6 +49,16 @@ public class PlayerMovement : MonoBehaviour
         Vector2 LookingAt = AimDirection - rb.position;
         float turnAngle = Mathf.Atan2(LookingAt.y, LookingAt.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = turnAngle;
+    }
+
+    public void OnTriggerEnter2D(Collider2D collObj)
+    {
+
+        if (collObj.gameObject.CompareTag("Currency"))
+        {
+            Destroy(collObj.gameObject);
+            currencyControl.AddCurrency();
+        }
     }
 
 }

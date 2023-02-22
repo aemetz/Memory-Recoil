@@ -13,6 +13,7 @@ public class ShopManager : MonoBehaviour
     public GameObject[] shopItemPanelsObject;
     public ShopCanvas[] shopItemPanels;
     public Button[] itemPanelButtons;
+    public CurrencyManager currencyControl;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,8 @@ public class ShopManager : MonoBehaviour
         {
             shopItemPanelsObject[i].SetActive(true);
         }
-            currency_display.text = "Coins: " + currency.ToString();
+        //currency_display.text = "Score: " + currency.ToString();
+        //currency = currencyControl.currencyCount;
         LoadShopItems();
         CheckCost();
     }
@@ -31,12 +33,12 @@ public class ShopManager : MonoBehaviour
         
     }
 
-    public void AddCurrency()
-    {
-        currency++;
-        currency_display.text = "Coins: " + currency.ToString();
-        CheckCost();
-    }
+    //public void AddCurrency()
+    //{
+    //    currency++;
+    //    currency_display.text = "Score: " + currency.ToString();
+    //    CheckCost();
+    //}
 
     public void LoadShopItems()
     {
@@ -44,7 +46,7 @@ public class ShopManager : MonoBehaviour
         {
             shopItemPanels[i].title.text = shopItemArray[i].itemTitle;
             shopItemPanels[i].descriptionText.text = shopItemArray[i].itemDescription;
-            shopItemPanels[i].costText.text = "Coins: " + shopItemArray[i].itemCost.ToString();
+            shopItemPanels[i].costText.text = "Score: " + shopItemArray[i].itemCost.ToString();
             shopItemPanels[i].itemImage.sprite = shopItemArray[i].image;
 
         }
@@ -54,7 +56,7 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i < shopItemArray.Length; i++)
         {
-            if (currency >= shopItemArray[i].itemCost)
+            if (currencyControl.currencyCount >= shopItemArray[i].itemCost)
             {
                 itemPanelButtons[i].interactable = true;
             }
@@ -68,10 +70,10 @@ public class ShopManager : MonoBehaviour
 
     public void BuyItem(int slotNumber)
     {
-        if(currency >= shopItemArray[slotNumber].itemCost)
+        if(currencyControl.currencyCount >= shopItemArray[slotNumber].itemCost)
         {
-            currency -= shopItemArray[slotNumber].itemCost;
-            currency_display.text = "Coins: " + currency.ToString();
+            bool openSpace = InventorySystem.instance.AddItem(shopItemArray[slotNumber]);
+            currencyControl.SubtractCurrency(shopItemArray[slotNumber].itemCost);
             CheckCost();
         }
     }

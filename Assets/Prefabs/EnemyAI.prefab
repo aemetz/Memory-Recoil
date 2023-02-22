@@ -34,7 +34,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 1471556376}
   - component: {fileID: 1471556374}
   - component: {fileID: 1471556375}
+  - component: {fileID: 6464779422864798985}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Enemy
@@ -627,3 +628,18 @@ MonoBehaviour:
   maxHealth: 5
   health: 5
   HealthBar: {fileID: 906471148}
+--- !u!114 &6464779422864798985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427329196436119422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942b55a93ae384e45995987e05b7d608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootPrefab: {fileID: 7629174986692736278, guid: 2b5fca03f9218e7419c9e12925b8c735, type: 3}
+  enemyDrops:
+  - {fileID: 11400000, guid: 9eb1513a423e47f4dbef481ec56f264e, type: 2}

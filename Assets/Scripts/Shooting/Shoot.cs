@@ -64,13 +64,13 @@ public class Shoot : MonoBehaviour
         {
             currWeapon = "None";
         }
-
+        Debug.Log(currWeapon);
         // Set gun stats here
         switch (currWeapon)
         {
             case "Pistol":
                 currFireRate = 0.5f;
-                currDamage = 2f;
+                currDamage = 20f;
                 break;
 
             case "SMG":
