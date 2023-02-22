@@ -122,4 +122,30 @@ public class InventorySystem : MonoBehaviour
 
         return null;
     }
+
+    public Item UseSelectedIem(bool use)
+    {
+        InventoryPosition slot = allInventoryPositions[selectedPosition];
+        InventoryObject objectInSlot = slot.GetComponentInChildren<InventoryObject>();
+        //If found empty spot in inventory is found then place it
+        if (objectInSlot != null)
+        {
+            Item item = objectInSlot.item;
+            if (use && item.type != ItemType.Weapon)
+            {
+                objectInSlot.itemCount--;
+                if(objectInSlot.itemCount <= 0)
+                {
+                    Destroy(objectInSlot.gameObject);
+                }
+                else
+                {
+                    objectInSlot.UpdateItemCount();
+                }
+            }
+            return item;
+        }
+
+        return null;
+    }
 }

@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     public CurrencyManager currencyControl;
 
+    public GameObject interactNotification;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +37,10 @@ public class PlayerMovement : MonoBehaviour
         InputMovement.x = Input.GetAxisRaw("Horizontal");
         InputMovement.y = Input.GetAxisRaw("Vertical");
         AimDirection = GameCamera.ScreenToWorldPoint(Input.mousePosition);
+        interactNotification.transform.localPosition = new Vector3(transform.position.x, transform.position.y + 1, 0);
 
-        
+
+
     }
 
     
@@ -60,5 +64,20 @@ public class PlayerMovement : MonoBehaviour
             currencyControl.AddCurrency();
         }
     }
+
+    public void UpdateSpeed()
+    {
+        moveSpeed += 2;
+    }
+
+    public void NotifyPlayer()
+    {
+        interactNotification.SetActive(true);
+    }
+    public void DeNotifyPlayer()
+    {
+        interactNotification.SetActive(false);
+    }
+
 
 }
