@@ -21,7 +21,9 @@ public class Shoot : MonoBehaviour
 
     private float prevBulletTime = 0;
 
-    // Change these variables in switch case depending on which gun is equipped
+    private bool canFire;
+
+    // Change these variables in Fire() depending on which gun is equipped
     private float currFireRate;
     private float currDamage;
     private string currWeapon;
@@ -34,18 +36,10 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             Fire();
         }
-
-        //Item equipped = inv.ChooseSelectedIem();
-        //if (equipped.name == "Pistol")
-        //{
-        //    activeWeapon = "Pistol";
-        //}
-
     }
 
     
@@ -54,7 +48,7 @@ public class Shoot : MonoBehaviour
 
         Item equipped = inv.ChooseSelectedIem();
 
-        Debug.Log(equipped);
+        //Debug.Log(equipped);
 
         if (equipped != null)
         {
@@ -64,43 +58,40 @@ public class Shoot : MonoBehaviour
         {
             currWeapon = "None";
         }
-        Debug.Log(currWeapon);
-        // Set gun stats here
-        switch (currWeapon)
+        //Debug.Log(currWeapon);
+
+        // TEMP: change weapon stats here
+        if (currWeapon == "Pistol")
         {
-            case "Pistol":
-                currFireRate = 0.5f;
-                currDamage = 20f;
-                break;
-
-            case "SMG":
-                currFireRate = 0.1f;
-                currDamage = 0.7f;
-                break;
-
-            case "None":
-                break;
+            currFireRate = 0.5f;
+            currDamage = 2.5f;
+            canFire = true;
         }
-
+        else if (currWeapon == "SMG")
+        {
+            currFireRate = 0.1f;
+            currDamage = 1f;
+            canFire = true;
+        }
+        else
+        {
+            canFire = false;
+        }
 
         if (Time.time > prevBulletTime + currFireRate)
         {
             prevBulletTime = Time.time;
 
-            if (equipped != null)
+            if (canFire)
             {
+                Debug.Log(currWeapon);
                 GameObject playerBullet = Instantiate(bullet, fp.position, fp.rotation);
                 playerBullet.GetComponent<Bullet>().BulletDamage = currDamage;
 
                 Rigidbody2D bulletBody = playerBullet.GetComponent<Rigidbody2D>();
                 bulletBody.AddForce(fp.up * -bulletSpeed, ForceMode2D.Impulse);
             }
-
         }
-
-        
-
-        
 
     }
 
