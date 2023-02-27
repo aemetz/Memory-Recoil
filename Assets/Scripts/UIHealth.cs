@@ -24,10 +24,7 @@ public class UIHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale != 0)
-        {
-            currHp = playerHp.currHealth;
-            GetComponent<Image>().sprite = healthBars[currHp - 1];
-        }
+        currHp = playerHp.currHealth;
+        GetComponent<Image>().sprite = healthBars[currHp];
     }
 }
