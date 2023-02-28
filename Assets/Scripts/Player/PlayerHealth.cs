@@ -21,16 +21,15 @@ public class PlayerHealth : MonoBehaviour
         regenAmt = 1;
     }
 
+    private void Update()
+    {
+
+    }
+
     public void TakeDamage(int damage)
     {
         currHealth -= damage;
-
-        if (currHealth <= 0)
-        {
-            // Player dies. For now, the game stops
-            Time.timeScale = 0;
-            //Destroy(gameObject);
-        }
+        Debug.Log(currHealth);
     }
 
     public void GainHealth(int amount)
@@ -38,12 +37,13 @@ public class PlayerHealth : MonoBehaviour
         if (currHealth < maxHealth)
         {
             currHealth += amount;
+            Debug.Log(currHealth);
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Regen"))
+        if (collision.CompareTag("Regen") && currHealth < maxHealth)
         {
             if (Time.time > lastRegen + regenRate)
             {

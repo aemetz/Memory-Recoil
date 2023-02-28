@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         {
             collision.GetComponent<Enemy>().LoseHealth(BulletDamage);
         }
-        if (collision.CompareTag("WaveTrigger") == false && collision.CompareTag("Regen") == false)
+        if (!collision.CompareTag("WaveTrigger") && !collision.CompareTag("Regen") && !collision.CompareTag("Currency"))
         {
             //Debug.Log(collision.collider.gameObject.name);
             //Debug.Log(collision.collider.gameObject.tag);

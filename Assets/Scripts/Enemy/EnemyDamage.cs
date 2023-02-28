@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
@@ -29,9 +30,18 @@ public class EnemyDamage : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player") && dmgTime <= Time.time)
         {
-            playerHp.TakeDamage(dmg);
-            dmgTime = Time.time + dmgInterval;
+            if (playerHp.currHealth < dmg && playerHp.currHealth > 0)
+            {
+                playerHp.currHealth = 0;
+                Time.timeScale = 0;
+            }
+            else
+            {
+                playerHp.TakeDamage(dmg);
+                dmgTime = Time.time + dmgInterval;
+            }
         }
+
     }
 
 }
