@@ -9,6 +9,7 @@ public class CurrencyManager : MonoBehaviour
 {
     public int currencyCount;
     public TMP_Text currency_display_Main;
+    public ShopManager shopTracker;
     //public TMP_Text currency_display_Shop;
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,7 @@ public class CurrencyManager : MonoBehaviour
     {
         currencyCount++;
         currency_display_Main.text = "Score: " + currencyCount.ToString();
+        shopTracker.CheckCost();
         //currency_display_Shop.text = "Score: " + currencyCount.ToString();
         
     }
@@ -35,6 +37,7 @@ public class CurrencyManager : MonoBehaviour
     {
         currencyCount -= spent;
         currency_display_Main.text = "Score: " + currencyCount.ToString();
+        shopTracker.CheckCost();
         //currency_display_Shop.text = "Score: " + currencyCount.ToString();
     }
 }

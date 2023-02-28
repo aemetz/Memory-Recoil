@@ -17,6 +17,10 @@ public class Shoot : MonoBehaviour
 
     [SerializeField] private InventorySystem inv;
 
+    public Sprite idleSprite;
+
+    public Sprite pistolSprite;
+
     //public string activeWeapon;
 
     private float prevBulletTime = 0;
@@ -66,6 +70,7 @@ public class Shoot : MonoBehaviour
             currFireRate = 0.5f;
             currDamage = 2.5f;
             canFire = true;
+            gameObject.GetComponent<SpriteRenderer>().sprite = pistolSprite;
         }
         else if (currWeapon == "SMG")
         {
@@ -76,6 +81,7 @@ public class Shoot : MonoBehaviour
         else
         {
             canFire = false;
+            gameObject.GetComponent<SpriteRenderer>().sprite = idleSprite;
         }
 
         if (Time.time > prevBulletTime + currFireRate)
