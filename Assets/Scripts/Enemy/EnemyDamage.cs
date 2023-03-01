@@ -12,11 +12,15 @@ public class EnemyDamage : MonoBehaviour
     float dmgInterval = 3f;
     float dmgTime;
 
+    //float shieldInterval = 2f;
+    //float shieldTime;
+
     // Start is called before the first frame update
     void Start()
     {
         playerHp = GameObject.Find("Player").GetComponent<PlayerHealth>();
         dmgTime = 0;
+        //shieldTime = 0;
     }
 
     // Update is called once per frame
@@ -37,7 +41,15 @@ public class EnemyDamage : MonoBehaviour
             }
             else
             {
-                playerHp.TakeDamage(dmg);
+                // Check for shield first, otherwise remove health
+                if (playerHp.currShield > 0)
+                {
+                    playerHp.TakeDamage(1);
+                }
+                else
+                {
+                    playerHp.TakeDamage(dmg);
+                }
                 dmgTime = Time.time + dmgInterval;
             }
         }

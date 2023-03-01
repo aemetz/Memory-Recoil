@@ -26,5 +26,6 @@ public class UIHealth : MonoBehaviour
     {
         currHp = playerHp.currHealth;
         GetComponent<Image>().sprite = healthBars[currHp];
+        //Debug.Log(currHp);
     }
 }
