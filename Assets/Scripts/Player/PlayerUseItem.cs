@@ -10,6 +10,8 @@ public class PlayerUseItem : MonoBehaviour
     public Animator animatorLeft;
     public Animator animatorRight;
     //public Animator animatorRight;
+    public GameObject powerupHealth;
+    public GameObject powerupSpeed;
 
     void Start()
     {
@@ -27,22 +29,18 @@ public class PlayerUseItem : MonoBehaviour
             if(checkItem != null)
             {
                 Debug.Log(checkItem.name);
-                if (checkItem.name == "Speed Potion")
-                {
-                    playerManager.GetComponent<PlayerMovement>().UpdateSpeed();
-                    InventorySystem.instance.UseSelectedIem(true);
-                }
-                else if (checkItem.name == "Potion")
-                {
-                    playerManager.GetComponent<PlayerHealth>().maxHealth += 2;
-                    InventorySystem.instance.UseSelectedIem(true);
-                }
-                else if(checkItem.name == "Key" && closeToDoor)
+                if (checkItem.name == "Key" && closeToDoor)
                 {
                     animatorLeft.SetFloat("hi", 1);
                     animatorRight.SetFloat("key", 1);
                     InventorySystem.instance.UseSelectedIem(true);
                 }
+                else if (checkItem.type == ItemType.Powerup)
+                {
+                    Debug.Log("Success!!!");
+                    StartCoroutine(Powerup(checkItem));
+                }
+                
                 
             }
         }
@@ -56,6 +54,42 @@ public class PlayerUseItem : MonoBehaviour
             Debug.Log("Interacting with Door !!!!!");
             closeToDoor = true;
         }
+    }
+
+
+    IEnumerator Powerup(Item itemUse)
+    {
+        Debug.Log("test");
+
+
+        if (itemUse.name == "Speed Potion")
+        {
+            playerManager.GetComponent<PlayerMovement>().UpdateSpeed(2);
+            Instantiate(powerupSpeed, transform);
+            InventorySystem.instance.UseSelectedIem(true);
+        }
+        else if (itemUse.name == "Potion")
+        {
+            bool heal = playerManager.GetComponent<PlayerHealth>().CheckHealth();
+            if (heal)
+            {
+                playerManager.GetComponent<PlayerHealth>().GainHealth(4);
+                Instantiate(powerupHealth, transform);
+                InventorySystem.instance.UseSelectedIem(true);
+            }
+            
+        }
+
+        yield return new WaitForSeconds(10f);
+
+
+        if (itemUse.name == "Speed Potion")
+        {
+            playerManager.GetComponent<PlayerMovement>().UpdateSpeed(-2);
+            
+        }
+        
+
     }
 
 

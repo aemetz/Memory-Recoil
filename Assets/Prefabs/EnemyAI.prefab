@@ -628,6 +628,7 @@ MonoBehaviour:
   maxHealth: 5
   health: 5
   HealthBar: {fileID: 906471148}
+  enemyDestroy: {fileID: 8131459602546304230, guid: 11667513fb59c3b43a96720cc4078c35, type: 3}
 --- !u!114 &6464779422864798985
 MonoBehaviour:
   m_ObjectHideFlags: 0

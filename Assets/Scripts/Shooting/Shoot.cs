@@ -12,6 +12,8 @@ public class Shoot : MonoBehaviour
     [SerializeField] private Transform fp;
 
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject effectSmoke;
+
 
     public float bulletSpeed = 20f;
 
@@ -20,6 +22,7 @@ public class Shoot : MonoBehaviour
     public Sprite idleSprite;
 
     public Sprite pistolSprite;
+
 
     //public string activeWeapon;
 
@@ -91,7 +94,9 @@ public class Shoot : MonoBehaviour
             if (canFire)
             {
                 Debug.Log(currWeapon);
+                GameObject shooteffect = Instantiate(effectSmoke, fp.position, fp.rotation);
                 GameObject playerBullet = Instantiate(bullet, fp.position, fp.rotation);
+                
                 playerBullet.GetComponent<Bullet>().BulletDamage = currDamage;
 
                 Rigidbody2D bulletBody = playerBullet.GetComponent<Rigidbody2D>();

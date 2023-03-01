@@ -41,6 +41,16 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public bool CheckHealth()
+    {
+        if(currHealth >= maxHealth)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Regen") && currHealth < maxHealth)

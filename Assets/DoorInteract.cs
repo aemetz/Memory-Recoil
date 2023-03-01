@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class DoorInteract : MonoBehaviour
 {
-    
 
+    
     void DoorDisapear()
     {
+        
         gameObject.SetActive(false);
+        AstarPath.active.Scan();
+
     }
 }

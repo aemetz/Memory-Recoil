@@ -65,9 +65,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void UpdateSpeed()
+    public void UpdateSpeed(float upspeed)
     {
-        moveSpeed += 2;
+        moveSpeed += upspeed;
     }
 
     public void NotifyPlayer()

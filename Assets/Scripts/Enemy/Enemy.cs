@@ -36,6 +36,8 @@ public class Enemy : MonoBehaviour
 
     public EnemyHealth HealthBar;
 
+    public GameObject enemyDestroy;
+
 
 
     void Start()
@@ -87,7 +89,7 @@ public class Enemy : MonoBehaviour
         HealthBar.SetHealth(health, maxHealth);
         if (health <= 0)
         {
-            
+            GameObject destoryEffect = Instantiate(enemyDestroy, transform.position, transform.rotation);
             Destruct();
         }
     }

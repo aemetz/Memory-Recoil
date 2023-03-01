@@ -41,7 +41,8 @@ public class Item : ScriptableObject
 public enum ItemType
 {
     Tool,
-    Weapon
+    Weapon,
+    Powerup
 }
 public enum ActionType
 {
