@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 970ccb53b0a7f0b419a1431fe2c15159, type: 3}
-  m_Name: Potion
+  m_Name: Invin
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
-  image: {fileID: 21300000, guid: 8fcd25c74920d644c96286a2ff7a8eff, type: 3}
+  image: {fileID: 21300000, guid: e1bdabd3fa92f0f4c921048995ec644b, type: 3}
   type: 2
   action: 0
   range: {x: 5, y: 4}
   stackable: 1
-  DropPercent: 0
-  itemTitle: Potion
-  itemDescription: A green liquid in a bottle. Seems Healthy.
+  DropPercent: 30
+  itemTitle: Invincibility Potion
+  itemDescription: Gives you temporary invincibility.
   itemCost: 1

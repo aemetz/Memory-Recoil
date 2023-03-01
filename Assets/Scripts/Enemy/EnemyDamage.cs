@@ -6,11 +6,13 @@ using UnityEngine;
 public class EnemyDamage : MonoBehaviour
 {
     public PlayerHealth playerHp;
+    public Renderer PlayerRend;
 
     // Change this value for the different types of enemies in the script attached to the prefab
     public int dmg;
     float dmgInterval = 3f;
     float dmgTime;
+    Color playerC;
 
     //float shieldInterval = 2f;
     //float shieldTime;
@@ -19,7 +21,9 @@ public class EnemyDamage : MonoBehaviour
     void Start()
     {
         playerHp = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        PlayerRend = GameObject.Find("Player").GetComponent<Renderer>();
         dmgTime = 0;
+        playerC = PlayerRend.material.color;
         //shieldTime = 0;
     }
 
@@ -45,15 +49,29 @@ public class EnemyDamage : MonoBehaviour
                 if (playerHp.currShield > 0)
                 {
                     playerHp.TakeDamage(1);
+                    StartCoroutine(Invincable(1.5f));
                 }
                 else
                 {
                     playerHp.TakeDamage(dmg);
+                    StartCoroutine(Invincable(1.5f));
                 }
                 dmgTime = Time.time + dmgInterval;
             }
         }
 
+    }
+
+
+    IEnumerator Invincable(float period)
+    {
+        Physics2D.IgnoreLayerCollision(8, 9, true);
+        playerC.a = 0.5f;
+        PlayerRend.material.color = playerC;
+        yield return new WaitForSeconds(period);
+        Physics2D.IgnoreLayerCollision(8, 9, false);
+        playerC.a = 1f;
+        PlayerRend.material.color = playerC;
     }
 
 }

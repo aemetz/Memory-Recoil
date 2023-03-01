@@ -12,10 +12,16 @@ public class PlayerUseItem : MonoBehaviour
     //public Animator animatorRight;
     public GameObject powerupHealth;
     public GameObject powerupSpeed;
+    public GameObject powerupInv;
+    public Renderer PlayerRend;
+    Color playerC;
 
     void Start()
     {
         
+        PlayerRend = GetComponent<Renderer>();
+        
+        playerC = PlayerRend.material.color;
     }
 
     // Update is called once per frame
@@ -79,6 +85,13 @@ public class PlayerUseItem : MonoBehaviour
             }
             
         }
+        else if (itemUse.name == "Invin")
+        {
+            StartCoroutine(Invincable(10f));
+            Instantiate(powerupInv, transform);
+            InventorySystem.instance.UseSelectedIem(true);
+
+        }
 
         yield return new WaitForSeconds(10f);
 
@@ -90,6 +103,18 @@ public class PlayerUseItem : MonoBehaviour
         }
         
 
+    }
+
+
+    IEnumerator Invincable(float period)
+    {
+        Physics2D.IgnoreLayerCollision(8, 9, true);
+        playerC.a = 0.5f;
+        PlayerRend.material.color = playerC;
+        yield return new WaitForSeconds(period);
+        Physics2D.IgnoreLayerCollision(8, 9, false);
+        playerC.a = 1f;
+        PlayerRend.material.color = playerC;
     }
 
 

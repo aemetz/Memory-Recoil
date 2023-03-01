@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5306201746804600809}
   - component: {fileID: 5306201746804600808}
   - component: {fileID: 5306201746804600807}
-  - component: {fileID: 5306201746804600804}
+  - component: {fileID: 2076002311}
   m_Layer: 6
   m_Name: DoorLeft
   m_TagString: Door
@@ -133,7 +133,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5306201746804600804
+--- !u!114 &2076002311
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
