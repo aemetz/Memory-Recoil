@@ -5,8 +5,11 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] public int maxHealth;
+    [SerializeField] public int maxShield;
 
     public int currHealth;
+
+    public int currShield;
 
     private float regenRate;
     private float lastRegen;
@@ -16,20 +19,22 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currHealth = maxHealth;
+        currShield = maxShield;
         regenRate = 2f;
         lastRegen = 0f;
         regenAmt = 1;
     }
 
-    private void Update()
-    {
-
-    }
-
     public void TakeDamage(int damage)
     {
-        currHealth -= damage;
-        Debug.Log(currHealth);
+        if (currShield > 0)
+        {
+            currShield--;
+        }
+        else
+        {
+            currHealth -= damage;
+        }
     }
 
     public void GainHealth(int amount)
@@ -37,12 +42,27 @@ public class PlayerHealth : MonoBehaviour
         if (currHealth < maxHealth)
         {
             currHealth += amount;
-            Debug.Log(currHealth);
+        }
+    }
+
+    public void GainShield(int amount)
+    {
+        if (currShield < maxShield)
+        {
+            currShield += amount;
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // If we implement picking up shield items from the ground, this will destroy it and increase player's shield by 1.
+        // Just need to tag the item as "Shield"
+        if (collision.CompareTag("Shield") && currShield < maxShield)
+        {
+            Destroy(collision.gameObject);
+            GainShield(1);
+        }
+
         if (collision.CompareTag("Regen") && currHealth < maxHealth)
         {
             if (Time.time > lastRegen + regenRate)
@@ -51,6 +71,7 @@ public class PlayerHealth : MonoBehaviour
                 GainHealth(regenAmt);
             }
         }
+
     }
 
 }
