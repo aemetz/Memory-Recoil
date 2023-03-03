@@ -21,4 +21,4 @@ MonoBehaviour:
   DropPercent: 30
   itemTitle: Invincibility Potion
   itemDescription: Gives you temporary invincibility.
-  itemCost: 1
+  itemCost: 7

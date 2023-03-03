@@ -20,5 +20,5 @@ MonoBehaviour:
   stackable: 1
   DropPercent: 0
   itemTitle: Potion
-  itemDescription: A green liquid in a bottle. Seems Healthy.
-  itemCost: 1
+  itemDescription: A red liquid in a bottle. Seems Healthy.
+  itemCost: 3
