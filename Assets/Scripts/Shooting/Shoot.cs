@@ -101,6 +101,7 @@ public class Shoot : MonoBehaviour
             if (canFire)
             {
                 fireSound.Play();
+                Debug.Log("SOUNDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
                 Debug.Log(currWeapon);
                 GameObject shooteffect = Instantiate(effectSmoke, fp.position, fp.rotation);
                 GameObject playerBullet = Instantiate(bullet, fp.position, fp.rotation);

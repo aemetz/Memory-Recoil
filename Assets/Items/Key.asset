@@ -18,6 +18,7 @@ MonoBehaviour:
   action: 0
   range: {x: 5, y: 4}
   stackable: 1
+  DropPercent: 100
   itemTitle: Key
   itemDescription: A shiny key. I wonder where it goes.
   itemCost: 100

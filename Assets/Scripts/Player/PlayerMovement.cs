@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private AudioSource walkSound;
+    [SerializeField] private AudioSource coinSound;
 
     Vector2 InputMovement;
     Vector2 AimDirection;
@@ -73,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(collObj.gameObject);
             currencyControl.AddCurrency();
+            coinSound.Play();
         }
 
         if(collObj.gameObject.CompareTag("Escaped"))

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DoorInteract : MonoBehaviour
 {
+    public Animator animatorother;
 
-    
     void DoorDisapear()
     {
         

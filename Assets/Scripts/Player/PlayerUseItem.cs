@@ -7,14 +7,18 @@ public class PlayerUseItem : MonoBehaviour
     // Start is called before the first frame update
     public GameObject playerManager;
     public bool closeToDoor;
-    public Animator animatorLeft;
-    public Animator animatorRight;
+    public Animator animatorDoor;
+    public Animator animatorDoorOther;
+
     //public Animator animatorRight;
     public GameObject powerupHealth;
     public GameObject powerupSpeed;
     public GameObject powerupInv;
     public Renderer PlayerRend;
     Color playerC;
+
+    [SerializeField] private AudioSource potionSound;
+    [SerializeField] AudioClip healthSound, shieldSound, speedSound, invinSound ;
 
     void Start()
     {
@@ -37,8 +41,10 @@ public class PlayerUseItem : MonoBehaviour
                 Debug.Log(checkItem.name);
                 if (checkItem.name == "Key" && closeToDoor)
                 {
-                    animatorLeft.SetFloat("hi", 1);
-                    animatorRight.SetFloat("key", 1);
+                    Debug.Log(animatorDoor);
+                    animatorDoor.SetFloat("key", 1);
+                    animatorDoorOther.SetFloat("key", 1);
+
                     InventorySystem.instance.UseSelectedIem(true);
                 }
                 else if (checkItem.type == ItemType.Powerup)
@@ -59,6 +65,8 @@ public class PlayerUseItem : MonoBehaviour
         {
             //Debug.Log("Interacting with Door !!!!!");
             closeToDoor = true;
+            animatorDoor = collision.gameObject.GetComponent<Animator>();
+            animatorDoorOther = collision.gameObject.GetComponent<DoorInteract>().animatorother;
         }
     }
 
@@ -73,6 +81,7 @@ public class PlayerUseItem : MonoBehaviour
             playerManager.GetComponent<PlayerMovement>().UpdateSpeed(2);
             Instantiate(powerupSpeed, transform);
             InventorySystem.instance.UseSelectedIem(true);
+            potionSound.clip = speedSound;
         }
         else if (itemUse.name == "Potion")
         {
@@ -82,6 +91,7 @@ public class PlayerUseItem : MonoBehaviour
                 playerManager.GetComponent<PlayerHealth>().GainHealth(4);
                 Instantiate(powerupHealth, transform);
                 InventorySystem.instance.UseSelectedIem(true);
+                potionSound.clip = healthSound;
             }
             
         }
@@ -93,6 +103,7 @@ public class PlayerUseItem : MonoBehaviour
                 playerManager.GetComponent<PlayerHealth>().GainShield(1);
                 Instantiate(powerupHealth, transform);
                 InventorySystem.instance.UseSelectedIem(true);
+                potionSound.clip = shieldSound;
             }
 
         }
@@ -101,8 +112,10 @@ public class PlayerUseItem : MonoBehaviour
             StartCoroutine(Invincable(10f));
             Instantiate(powerupInv, transform);
             InventorySystem.instance.UseSelectedIem(true);
+            potionSound.clip = invinSound;
 
         }
+        potionSound.Play();
 
         yield return new WaitForSeconds(10f);
 

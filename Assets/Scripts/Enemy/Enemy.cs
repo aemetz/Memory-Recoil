@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
     public EnemyHealth HealthBar;
 
     public GameObject enemyDestroy;
+    public GameObject keyDrop;
 
     public AIPath pathfinder;
 
@@ -72,10 +73,11 @@ public class Enemy : MonoBehaviour
                 pathfinder.maxSpeed = 3;
             }
 
-            
-        }
 
-        if (!enemySound.isPlaying)
+        }
+        float randomSound = Random.Range(0f, 101f);
+
+        if (!enemySound.isPlaying && randomSound <= 0.3f)
         {
             enemySound.Play();
         }
@@ -103,7 +105,17 @@ public class Enemy : MonoBehaviour
 
     void Destruct()
     {
-        GetComponent<EnemyLoot>().SpawnLoot(transform.position);
+        if (this.name == "EnemyAITank (Boss)")
+        {
+
+            Instantiate(keyDrop, transform.position, transform.rotation);
+
+        }
+        else
+        {
+            GetComponent<EnemyLoot>().SpawnLoot(transform.position);
+        }
+        
         Destroy(gameObject);
     }
 
