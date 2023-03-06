@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyDamage : MonoBehaviour
 {
@@ -10,9 +11,11 @@ public class EnemyDamage : MonoBehaviour
 
     // Change this value for the different types of enemies in the script attached to the prefab
     public int dmg;
+    //private int bossDmg;
     float dmgInterval = 3f;
     float dmgTime;
     Color playerC;
+    private Enemy enemyHp;
 
     //float shieldInterval = 2f;
     //float shieldTime;
@@ -25,12 +28,39 @@ public class EnemyDamage : MonoBehaviour
         dmgTime = 0;
         playerC = PlayerRend.material.color;
         //shieldTime = 0;
+        //bossDmg = 4;
+        enemyHp = GetComponent<Enemy>();
+
+        if (this.name == "EnemyAITank (Boss)")
+        {
+            dmg = 4;
+        }
+        Physics2D.IgnoreLayerCollision(8, 9, false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (this.name == "EnemyAITank (Boss)")
+        {
+            if (enemyHp.health < 67 && enemyHp.health > 33)
+            {
+                //Debug.Log("STAGE 2");
+                dmg = 5;
+            }
+            else if (enemyHp.health <= 33)
+            {
+                //Debug.Log("STAGE 3");
+                dmg = 6;
+            }
+        }
+        if (playerHp.currHealth <= 0)
+        {
+            //playerHp.currHealth = playerHp.maxHealth;
+            SceneManager.LoadScene(2);
+        }
+        //Debug.Log(playerHp.currHealth);
     }
 
 
@@ -38,23 +68,44 @@ public class EnemyDamage : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player") && dmgTime <= Time.time)
         {
-            if (playerHp.currHealth < dmg && playerHp.currHealth > 0)
+            // If the player will die on hit
+            if (playerHp.currHealth <= dmg && playerHp.currHealth > 0)
             {
-                playerHp.currHealth = 0;
-                Time.timeScale = 0;
+                playerHp.TakeDamage(playerHp.currHealth);
+                //Physics2D.IgnoreLayerCollision(8, 9, false);
+                SceneManager.LoadScene(2);
+                //Time.timeScale = 0;
             }
+            // If the player won't die on hit
             else
             {
                 // Check for shield first, otherwise remove health
                 if (playerHp.currShield > 0)
                 {
-                    playerHp.TakeDamage(1);
-                    StartCoroutine(Invincable(1.5f));
+                    if (playerHp.currHealth > dmg)
+                    {
+                        playerHp.TakeDamage(1);
+                        StartCoroutine(Invincable(1.5f));
+                    }
+                    
                 }
                 else
                 {
-                    playerHp.TakeDamage(dmg);
-                    StartCoroutine(Invincable(1.5f));
+                    //if (this.name == "EnemyAITank (Boss)")
+                    //{
+                    //    //Debug.Log("YOOOOOOOOOO BOSS");
+                    //    playerHp.TakeDamage(dmg);
+                    //    StartCoroutine(Invincable(1.5f));
+                    //}
+                    //else
+                    //{
+                    if (playerHp.currHealth > dmg)
+                    {
+                        playerHp.TakeDamage(dmg);
+                        StartCoroutine(Invincable(1.5f));
+                    }
+                    
+                    //}
                 }
                 dmgTime = Time.time + dmgInterval;
             }
@@ -70,6 +121,7 @@ public class EnemyDamage : MonoBehaviour
         PlayerRend.material.color = playerC;
         yield return new WaitForSeconds(period);
         Physics2D.IgnoreLayerCollision(8, 9, false);
+        Debug.Log("INVINCIBILITY OFF");
         playerC.a = 1f;
         PlayerRend.material.color = playerC;
     }

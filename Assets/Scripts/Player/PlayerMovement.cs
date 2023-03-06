@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -72,6 +73,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(collObj.gameObject);
             currencyControl.AddCurrency();
+        }
+
+        if(collObj.gameObject.CompareTag("Escaped"))
+        {
+            SceneManager.LoadScene(3);
         }
     }
 

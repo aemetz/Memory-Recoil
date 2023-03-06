@@ -25,7 +25,16 @@ public class UIHealth : MonoBehaviour
     void Update()
     {
         currHp = playerHp.currHealth;
-        GetComponent<Image>().sprite = healthBars[currHp];
+        // To fix indexing errors (which idt we have to) we need to know how much damage is incoming and check if that damage is
+        // greather than or equal to currHp. If it is, we set curr to 0 and it indexes to the empty hp bar
+        if (currHp <= 0)
+        {
+            GetComponent<Image>().sprite = healthBars[0];
+        }
+        else
+        {
+            GetComponent<Image>().sprite = healthBars[currHp];
+        }
         //Debug.Log(currHp);
     }
 }
