@@ -70,6 +70,11 @@ public class PlayerUseItem : MonoBehaviour
         }
     }
 
+    public void CallInvincible()
+    {
+        StartCoroutine(Invincable(1.5f));
+    }
+
 
     IEnumerator Powerup(Item itemUse)
     {

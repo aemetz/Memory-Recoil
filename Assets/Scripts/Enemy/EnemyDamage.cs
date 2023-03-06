@@ -8,6 +8,7 @@ public class EnemyDamage : MonoBehaviour
 {
     public PlayerHealth playerHp;
     public Renderer PlayerRend;
+    public PlayerUseItem playerInvin;
 
     // Change this value for the different types of enemies in the script attached to the prefab
     public int dmg;
@@ -25,6 +26,7 @@ public class EnemyDamage : MonoBehaviour
     {
         playerHp = GameObject.Find("Player").GetComponent<PlayerHealth>();
         PlayerRend = GameObject.Find("Player").GetComponent<Renderer>();
+        playerInvin = GameObject.Find("Player").GetComponent<PlayerUseItem>();
         dmgTime = 0;
         playerC = PlayerRend.material.color;
         //shieldTime = 0;
@@ -85,7 +87,7 @@ public class EnemyDamage : MonoBehaviour
                     if (playerHp.currHealth > dmg)
                     {
                         playerHp.TakeDamage(1);
-                        StartCoroutine(Invincable(1.5f));
+                        playerInvin.CallInvincible();
                     }
                     
                 }
@@ -102,7 +104,7 @@ public class EnemyDamage : MonoBehaviour
                     if (playerHp.currHealth > dmg)
                     {
                         playerHp.TakeDamage(dmg);
-                        StartCoroutine(Invincable(1.5f));
+                        playerInvin.CallInvincible();
                     }
                     
                     //}
