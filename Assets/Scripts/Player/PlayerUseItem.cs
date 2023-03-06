@@ -57,7 +57,7 @@ public class PlayerUseItem : MonoBehaviour
     {
         if (collision.collider.CompareTag("Door"))
         {
-            Debug.Log("Interacting with Door !!!!!");
+            //Debug.Log("Interacting with Door !!!!!");
             closeToDoor = true;
         }
     }

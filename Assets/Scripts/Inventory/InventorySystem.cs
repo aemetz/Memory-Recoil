@@ -72,7 +72,7 @@ public class InventorySystem : MonoBehaviour
         for (int i = 0; i < allInventoryPositions.Length; i++)
         {
             //Get Slot at current position
-            Debug.Log("Hi");
+            //Debug.Log("Hi");
             InventoryPosition slot = allInventoryPositions[i];
             //Get children in slot which may or may not be an item
             InventoryObject objectInSlot = slot.GetComponentInChildren<InventoryObject>();
