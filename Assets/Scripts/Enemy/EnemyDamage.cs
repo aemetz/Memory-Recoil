@@ -119,6 +119,7 @@ public class EnemyDamage : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 9, true);
         playerC.a = 0.5f;
         PlayerRend.material.color = playerC;
+        Debug.Log("Invincible period");
         yield return new WaitForSeconds(period);
         Physics2D.IgnoreLayerCollision(8, 9, false);
         Debug.Log("INVINCIBILITY OFF");
