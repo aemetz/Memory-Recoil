@@ -64,13 +64,13 @@ public class Enemy : MonoBehaviour
     {
         if (this.name == "EnemyAITank (Boss)")
         {
-            if (health < 67 && health > 33)
+            if (health < (.67f * maxHealth)  && (health > (.33f * maxHealth)))
             {
                 pathfinder.maxSpeed = 2;
             }
-            if (health <= 33)
+            if (health <= (.33f * maxHealth))
             {
-                pathfinder.maxSpeed = 3;
+                pathfinder.maxSpeed = 4;
             }
 
 

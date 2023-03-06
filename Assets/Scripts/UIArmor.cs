@@ -25,6 +25,16 @@ public class UIArmor : MonoBehaviour
     void Update()
     {
         currArmor = playerArmor.currShield;
-        GetComponent<Image>().sprite = armorBars[currArmor];
+
+        if (playerArmor.currShield < 0)
+        {
+            playerArmor.currShield = 0;
+        }
+        else if (playerArmor.currShield > maxArmor)
+        {
+            playerArmor.currShield = maxArmor;
+        }
+        //Debug.Log(playerArmor.currShield);
+        GetComponent<Image>().sprite = armorBars[playerArmor.currShield];
     }
 }

@@ -29,12 +29,18 @@ public class UIHealth : MonoBehaviour
         // greather than or equal to currHp. If it is, we set curr to 0 and it indexes to the empty hp bar
         if (currHp <= 0)
         {
-            GetComponent<Image>().sprite = healthBars[0];
+            //GetComponent<Image>().sprite = healthBars[0];
+            playerHp.currHealth = 0;
         }
-        else
+        else if (currHp > maxHp)
         {
-            GetComponent<Image>().sprite = healthBars[currHp];
+            playerHp.currHealth = maxHp;
         }
+        //else
+        //{
+        //Debug.Log(playerHp.currHealth);
+        GetComponent<Image>().sprite = healthBars[playerHp.currHealth];
+        //}
         //Debug.Log(currHp);
     }
 }

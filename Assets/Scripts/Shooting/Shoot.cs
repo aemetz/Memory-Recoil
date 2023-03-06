@@ -84,7 +84,7 @@ public class Shoot : MonoBehaviour
         {
             fireSound.clip = machineSound;
             currFireRate = 0.1f;
-            currDamage = 1f;
+            currDamage = 0.75f;
             canFire = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = machinePlayer;
         }
