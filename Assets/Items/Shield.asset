@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
-  image: {fileID: 0}
-  type: 0
+  image: {fileID: -474874788, guid: 838c439128c988d418a519837407aa88, type: 3}
+  type: 2
   action: 0
   range: {x: 5, y: 4}
   stackable: 1
+  DropPercent: 0
   itemTitle: Shield
   itemDescription: Sturdy armor that was created in the lab
-  itemCost: 25
+  itemCost: 1

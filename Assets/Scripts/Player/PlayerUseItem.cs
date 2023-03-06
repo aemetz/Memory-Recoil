@@ -85,6 +85,17 @@ public class PlayerUseItem : MonoBehaviour
             }
             
         }
+        else if (itemUse.name == "Shield")
+        {
+            bool shield = playerManager.GetComponent<PlayerHealth>().CheckShield();
+            if (shield)
+            {
+                playerManager.GetComponent<PlayerHealth>().GainShield(1);
+                Instantiate(powerupHealth, transform);
+                InventorySystem.instance.UseSelectedIem(true);
+            }
+
+        }
         else if (itemUse.name == "Invin")
         {
             StartCoroutine(Invincable(10f));

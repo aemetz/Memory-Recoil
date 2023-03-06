@@ -63,6 +63,16 @@ public class PlayerHealth : MonoBehaviour
         return true;
     }
 
+    public bool CheckShield()
+    {
+        if (currShield >= maxShield)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         // If we implement picking up shield items from the ground, this will destroy it and increase player's shield by 1.
