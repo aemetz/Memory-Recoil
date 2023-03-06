@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     [SerializeField] private float moveSpeed;
+    [SerializeField] private AudioSource walkSound;
 
     Vector2 InputMovement;
     Vector2 AimDirection;
@@ -36,6 +37,15 @@ public class PlayerMovement : MonoBehaviour
         
         InputMovement.x = Input.GetAxisRaw("Horizontal");
         InputMovement.y = Input.GetAxisRaw("Vertical");
+        if(InputMovement.x != 0 || InputMovement.y != 0)
+        {
+            if (!walkSound.isPlaying)
+            {
+                walkSound.Play();
+            }
+            
+        }
+       
         AimDirection = GameCamera.ScreenToWorldPoint(Input.mousePosition);
         interactNotification.transform.localPosition = new Vector3(transform.position.x, transform.position.y + 1, 0);
 

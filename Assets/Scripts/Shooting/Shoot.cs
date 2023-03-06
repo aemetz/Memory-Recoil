@@ -14,6 +14,8 @@ public class Shoot : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject effectSmoke;
 
+    [SerializeField] private AudioSource fireSound;
+    [SerializeField] AudioClip pistolSound, machineSound;
 
     public float bulletSpeed = 20f;
 
@@ -22,6 +24,8 @@ public class Shoot : MonoBehaviour
     public Sprite idleSprite;
 
     public Sprite pistolSprite;
+
+    public Sprite machinePlayer;
 
 
     //public string activeWeapon;
@@ -70,6 +74,7 @@ public class Shoot : MonoBehaviour
         // TEMP: change weapon stats here
         if (currWeapon == "Pistol")
         {
+            fireSound.clip = pistolSound;
             currFireRate = 0.5f;
             currDamage = 2.5f;
             canFire = true;
@@ -77,9 +82,11 @@ public class Shoot : MonoBehaviour
         }
         else if (currWeapon == "SMG")
         {
+            fireSound.clip = machineSound;
             currFireRate = 0.1f;
             currDamage = 1f;
             canFire = true;
+            gameObject.GetComponent<SpriteRenderer>().sprite = machinePlayer;
         }
         else
         {
@@ -93,6 +100,7 @@ public class Shoot : MonoBehaviour
 
             if (canFire)
             {
+                fireSound.Play();
                 Debug.Log(currWeapon);
                 GameObject shooteffect = Instantiate(effectSmoke, fp.position, fp.rotation);
                 GameObject playerBullet = Instantiate(bullet, fp.position, fp.rotation);

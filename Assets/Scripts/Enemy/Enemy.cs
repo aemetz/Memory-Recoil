@@ -41,6 +41,8 @@ public class Enemy : MonoBehaviour
 
     public AIPath pathfinder;
 
+    [SerializeField] private AudioSource enemySound;
+
 
     void Start()
     {
@@ -73,7 +75,10 @@ public class Enemy : MonoBehaviour
             
         }
 
-
+        if (!enemySound.isPlaying)
+        {
+            enemySound.Play();
+        }
     }
 
     public void Spawn()
