@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -38,6 +39,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject enemyDestroy;
 
+    public AIPath pathfinder;
 
 
     void Start()
@@ -50,30 +52,27 @@ public class Enemy : MonoBehaviour
         //currentTime = Time.time;
 
         HealthBar.SetHealth(health, maxHealth);
+        pathfinder = GetComponent<AIPath>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        //OffsetToPlayer = playerChase.position - transform.position;
-        //HeadingToPlayer = OffsetToPlayer.normalized;
+        if (this.name == "EnemyAITank (Boss)")
+        {
+            if (health < 67 && health > 33)
+            {
+                pathfinder.maxSpeed = 2;
+            }
+            if (health <= 33)
+            {
+                pathfinder.maxSpeed = 3;
+            }
 
+            
+        }
 
-
-        //if (Vector2.Distance(transform.position, playerChase.position) > enemyStopDistance)
-        //{
-
-        //    transform.position = Vector2.MoveTowards(transform.position, playerChase.position, enemySpeed * Time.deltaTime);
-        //}
-        //else if (Vector2.Distance(transform.position, playerChase.position) < enemyStopDistance && Vector2.Distance(transform.position, playerChase.position) > enemyDistance)
-        //{
-        //    transform.position = this.transform.position;
-        //}
-        //else if (Vector2.Distance(transform.position, playerChase.position) < enemyDistance)
-        //{
-        //    transform.position = Vector2.MoveTowards(transform.position, playerChase.position, -enemySpeed * Time.deltaTime);
-        //}
 
     }
 
