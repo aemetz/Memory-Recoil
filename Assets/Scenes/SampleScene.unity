@@ -83821,7 +83821,6 @@ MonoBehaviour:
   currency: 0
   currency_display: {fileID: 0}
   shopItemArray:
-  - {fileID: 11400000, guid: 52691e9d982b2f543a7592cf2121fd67, type: 2}
   - {fileID: 11400000, guid: 60c1b81d9823f7841817b0839178b55d, type: 2}
   - {fileID: 11400000, guid: 7835358be882457419ee21f28a07b0ea, type: 2}
   - {fileID: 11400000, guid: 4fb85efb21b09ed40afafaa2f96e4612, type: 2}
@@ -85928,10 +85927,6 @@ PrefabInstance:
     - target: {fileID: 1588889127758593415, guid: c6e4194433e445b438e2cb008733a26e, type: 3}
       propertyPath: m_Name
       value: ItemCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1588889127758593415, guid: c6e4194433e445b438e2cb008733a26e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3280668365286258947, guid: c6e4194433e445b438e2cb008733a26e, type: 3}
       propertyPath: m_Pivot.x

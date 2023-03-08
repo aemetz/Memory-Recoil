@@ -21,4 +21,4 @@ MonoBehaviour:
   DropPercent: 0
   itemTitle: Speed Potion
   itemDescription: Can make you a bit faster.
-  itemCost: 1
+  itemCost: 10

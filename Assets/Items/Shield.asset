@@ -21,4 +21,4 @@ MonoBehaviour:
   DropPercent: 0
   itemTitle: Shield
   itemDescription: Sturdy armor that was created in the lab
-  itemCost: 3
+  itemCost: 6

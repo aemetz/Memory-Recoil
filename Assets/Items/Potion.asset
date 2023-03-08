@@ -21,4 +21,4 @@ MonoBehaviour:
   DropPercent: 0
   itemTitle: Potion
   itemDescription: A red liquid in a bottle. Seems Healthy.
-  itemCost: 3
+  itemCost: 6
